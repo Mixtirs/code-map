@@ -1,23 +1,13 @@
 import { memo, useContext, createContext } from 'react'
 import { Handle, Position, type NodeProps, type Node } from '@xyflow/react'
-import type { MapNodeData } from '../layout/build'
+import { ChevronDown, ChevronRight, FileCode2, Sparkles } from 'lucide-react'
+import type { MapNodeData } from '../layout/flow'
+import { KIND_META } from './kinds'
 
 /** Lets nodes ask the app to expand or collapse them. */
 export const ToggleContext = createContext<(id: string) => void>(() => {})
 
 type MapNode = Node<MapNodeData>
-
-const KIND_ICON: Record<string, string> = {
-  simple: '≡',
-  if: '◇',
-  for: '↻',
-  while: '↻',
-  try: '⚠',
-  with: '⊡',
-  match: '⋔',
-  branch: '↳',
-  def: 'ƒ'
-}
 
 // Files are stacked top to bottom, so their links leave from the bottom edge.
 // Functions and blocks sit in columns, so their links use the sides.
@@ -32,36 +22,50 @@ function Handles({ vertical = false }: { vertical?: boolean }) {
 
 function Chevron({ id, data }: { id: string; data: MapNodeData }) {
   const toggle = useContext(ToggleContext)
-  if (!data.expandable) return null
+  if (!data.expandable) return <span className="chevron-space" />
   return (
     <button
       className="chevron nodrag"
-      title={data.expanded ? 'Collapse' : `Expand (${data.childCount} inside)`}
+      title={data.expanded ? 'Close' : `Open (${data.childCount} inside)`}
+      aria-label={data.expanded ? 'Close' : 'Open'}
       onClick={(e) => {
         e.stopPropagation()
         toggle(id)
       }}
     >
-      {data.expanded ? '▾' : '▸'}
+      {data.expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
     </button>
   )
 }
 
 const cls = (data: MapNodeData, base: string) =>
-  [base, data.highlight ? 'is-highlight' : '', data.expanded ? 'is-open' : 'is-closed'].filter(Boolean).join(' ')
+  [
+    base,
+    data.state === 'highlight' ? 'is-highlight' : '',
+    data.state === 'dim' ? 'is-dim' : '',
+    data.step ? 'is-step' : '',
+    data.hit ? 'is-hit' : '',
+    data.expanded ? 'is-open' : 'is-closed'
+  ]
+    .filter(Boolean)
+    .join(' ')
 
 export const FileNodeView = memo(({ id, data }: NodeProps<MapNode>) => (
   <div className={cls(data, 'node node-file')}>
     <Handles vertical />
     <div className="node-head">
       <Chevron id={id} data={data} />
-      <span className="node-icon">📄</span>
+      <FileCode2 className="node-icon file-icon" size={18} />
       <div className="node-text">
-        <div className="node-title" title={data.title}>
+        <div className="node-title lod-title" title={data.title}>
           {data.title}
-          {data.hasParseErrors && <span className="badge-warn" title="Some syntax was not understood">!</span>}
+          {data.hasParseErrors && (
+            <span className="badge-warn" title="Some syntax was not understood">
+              !
+            </span>
+          )}
         </div>
-        <div className="node-sub">{data.subtitle}</div>
+        <div className="node-sub lod-detail">{data.subtitle}</div>
       </div>
     </div>
   </div>
@@ -72,34 +76,35 @@ export const FunctionNodeView = memo(({ id, data }: NodeProps<MapNode>) => (
     <Handles />
     <div className="node-head">
       <Chevron id={id} data={data} />
-      <span className="node-icon fn-icon">ƒ</span>
+      <span className="fn-icon">ƒ</span>
       <div className="node-text">
-        <div className="node-title" title={`${data.title}${data.subtitle ?? ''}`}>
+        <div className="node-title lod-title" title={data.title}>
           {data.title}
+          {data.hasNote && <Sparkles className="ai-dot" size={11} />}
         </div>
-        <div className="node-sub" title={data.subtitle}>
-          {data.subtitle} · L{data.lines[0]}–{data.lines[1]}
+        <div className="node-sub lod-detail" title={data.subtitle}>
+          {data.subtitle ? `${data.subtitle} · ` : ''}L{data.lines[0]}–{data.lines[1]}
         </div>
       </div>
-      {!data.expanded && data.childCount > 0 && <span className="count">{data.childCount}</span>}
+      {!data.expanded && data.childCount > 0 && <span className="count lod-detail">{data.childCount}</span>}
     </div>
   </div>
 ))
 
 export const BlockNodeView = memo(({ id, data }: NodeProps<MapNode>) => {
   const n = data.lines[1] - data.lines[0] + 1
+  const meta = KIND_META[data.blockKind ?? 'simple']
+  const Icon = meta.icon
   return (
-    <div className={cls(data, `node node-block kind-${data.blockKind}`)}>
+    <div className={cls(data, `node node-block kind-${data.blockKind}${data.hasNote ? ' has-note' : ''}`)}>
       <Handles />
       <div className="block-row">
         <Chevron id={id} data={data} />
-        <span className="block-icon">{KIND_ICON[data.blockKind ?? 'simple']}</span>
-        <span className="block-label" title={data.title}>
+        <Icon className="block-icon" size={14} />
+        <span className="block-label lod-title" title={data.code ?? data.title}>
           {data.title}
         </span>
-        <span className="block-lines" title={`Lines ${data.lines[0]}–${data.lines[1]}`}>
-          {n > 1 ? `${n} lines` : `L${data.lines[0]}`}
-        </span>
+        <span className="block-lines lod-detail">{n > 1 ? `${n} lines` : `L${data.lines[0]}`}</span>
       </div>
     </div>
   )

@@ -10,7 +10,7 @@ export const LIMITS = {
 }
 
 // Folders that hold other people's code or build output, not the project itself.
-const SKIP_DIRS = new Set([
+export const SKIP_DIRS = new Set([
   '.git',
   '__pycache__',
   'node_modules',

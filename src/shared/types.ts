@@ -66,7 +66,10 @@ export interface RepoInfo {
   owner: string
   name: string
   ref: string
+  /** GitHub URL, or '' for a local folder */
   url: string
+  /** Set when the code came from a folder on this computer */
+  localPath?: string
 }
 
 export interface RepoGraph {
@@ -93,9 +96,62 @@ export interface Progress {
 
 export type LoadResult = { ok: true; graph: RepoGraph } | { ok: false; error: string }
 
+// ---------- AI (Claude) ----------
+
+export interface AiBlockNote {
+  /** Short name shown on the block, e.g. "Load saved to-dos" */
+  name: string
+  /** 1-2 plain-English sentences, shown on hover */
+  purpose: string
+}
+
+/** A group of functions that together make one feature of the app. AI-guessed. */
+export interface AiFeature {
+  id: string
+  name: string
+  description: string
+  functionIds: string[]
+}
+
+export interface AiNotes {
+  blocks: Record<string, AiBlockNote>
+  /** Function id -> one-sentence summary */
+  functions: Record<string, string>
+  features: AiFeature[]
+}
+
+export interface AiStatus {
+  state: 'idle' | 'running' | 'done' | 'error'
+  message: string
+  filesDone: number
+  filesTotal: number
+}
+
+export const AI_MODELS = [
+  { id: 'claude-opus-5-5', label: 'Claude Opus 5.5 (best)' },
+  { id: 'claude-sonnet-5-5', label: 'Claude Sonnet 5.5 (faster)' },
+  { id: 'claude-haiku-5-5', label: 'Claude Haiku 5.5 (cheapest)' }
+] as const
+
+export interface Settings {
+  hasApiKey: boolean
+  /** true when the key comes from the ANTHROPIC_API_KEY environment variable */
+  keyFromEnv: boolean
+  model: string
+  theme: 'system' | 'dark' | 'light'
+}
+
 /** What the preload script exposes to the screen as window.api */
 export interface CodeMapApi {
   loadRepo(url: string): Promise<LoadResult>
+  openFolder(): Promise<LoadResult | null>
   onProgress(cb: (p: Progress) => void): () => void
   getSource(fileId: string): Promise<string | null>
+  getSettings(): Promise<Settings>
+  saveSettings(s: { apiKey?: string | null; model?: string; theme?: Settings['theme'] }): Promise<Settings>
+  /** Starts naming blocks and grouping features for the repo that is loaded now. */
+  runAi(): Promise<void>
+  cancelAi(): Promise<void>
+  onAiNotes(cb: (notes: Partial<AiNotes>) => void): () => void
+  onAiStatus(cb: (s: AiStatus) => void): () => void
 }
