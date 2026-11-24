@@ -14,12 +14,16 @@
   "author": "Nawaf",
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.13.0",
     "@xyflow/react": "^13.0.3",
     "adm-zip": "^0.6.1",
     "elkjs": "^0.12.1",
+    "highlight.js": "^11.12.0",
+    "lucide-react": "^1.79.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "web-tree-sitter": "^0.25.10"
+    "web-tree-sitter": "^0.25.10",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.8",
