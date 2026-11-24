@@ -2,68 +2,72 @@
 
 Code mapping app that extracts GitHub code and maps the code to make it easier to debug and understand.
 
-A Windows desktop app that turns a public GitHub Python repo into an interactive diagram,
-so you can see how the code fits together without reading every line.
+A desktop app (Windows and Mac) that turns a Python project, from GitHub or from your own computer,
+into an interactive diagram, so you can see how the code fits together without reading every line.
 
-Built for the Nmkkn AI Hackathon (Nov–Dec 2026).
+Built for the Nmkkn AI Hackathon (Nov–Dec 2026). For build steps, status and known issues, see [HANDOFF.md](HANDOFF.md).
 
-## What works now (Phase 1)
+## What it does
 
-- Paste a public GitHub repo URL. The app downloads GitHub's zip of it (no git needed).
-- Only `.py` files are read. **The repo's code is never run.**
-- Tree-sitter reads each file and finds files, functions, classes and methods.
-- Each function is split into **blocks**, one per step:
-  - neighbouring simple lines (assignments, prints, returns) become one block;
-  - `if` / `for` / `while` / `try` / `with` / `match` become one block you can open (▸) to see the blocks inside.
-- **Hard links** (solid lines), found by the parser:
-  - blue: a file imports another file;
-  - amber: a block calls a function in this repo (calls to outside libraries get no line).
-- Click any box to highlight its links. Open or close files, functions and blocks with ▸ / ▾.
+- **Open code:** paste a public GitHub repo URL (the app downloads GitHub's zip, no git needed), or press
+  **Open a folder on this computer**. Only `.py` files are read. **The code is never run.**
+- **Blocks:** Tree-sitter reads each file and splits every function into blocks, one per step.
+  Neighbouring simple lines become one block; `if` / `for` / `while` / `try` / `with` / `match` become a block you can open (▸).
+  Each block type has its own colour, shown in the legend.
+- **Hard links** (solid lines), found by the parser: blue when a file imports another file, amber when a block calls a function in this repo.
+- **Claude notes** (needs an API key in Settings): press **Explain with Claude** to get a short name for every block,
+  a one-line note on every function and block (rest the mouse on a box to see it), and feature groups drawn as
+  **dashed "AI-guessed" links**. Notes are cached, so a second look at the same code is free.
+- **Click to code:** click a box to see its lines in the side panel, highlighted.
+- **Zoom levels:** Files, Functions or Blocks. Labels stay readable at every zoom.
+- **Search** (Ctrl+F): find a file, function or step and jump to it.
+- **Step through:** walks the code in run order from the entry point, going into functions it calls. Use ← and → keys. Nothing is executed; it follows the code's text.
+- Dark and light themes, a resizable side panel and a short first-run hint.
 
-## Run it on Windows
+## Run it
 
-You need [Node.js](https://nodejs.org) 20 or newer (the LTS installer is fine).
+You need [Node.js](https://nodejs.org) 20 or newer.
 
-```powershell
+```
 npm install
 npm run dev
 ```
 
-`npm run dev` opens the app with live reload. Other commands:
-
 | Command | What it does |
 | --- | --- |
-| `npm test` | Runs the parser tests on `samples/todo_app` |
+| `npm run dev` | Opens the app with live reload |
+| `npm test` | Runs the parser and layout tests |
 | `npm run typecheck` | Checks the TypeScript for mistakes |
-| `npm run dist:win` | Builds a Windows installer and portable `.exe` into `release/` |
+| `npm run dist:win` | Windows installer and portable `.exe` into `release/` (run on Windows) |
+| `npm run dist:mac` | Mac `.dmg` and `.zip` with `Code Map.app` into `release/` (run on a Mac) |
+
+You can also build both on GitHub: Actions tab, **Build apps**, **Run workflow**. See HANDOFF.md.
 
 ## How it's organised
 
 ```
 src/
-  main/            Node side of Electron (has file and network access)
-    repo/          GitHub URL parsing, zip download, .py extraction
+  main/            Node side of Electron (file and network access)
+    repo/          GitHub URL parsing + zip download, local folder reading
     parser/        Tree-sitter → functions and blocks
     links/         imports + calls → hard links
-    pipeline.ts    the whole flow: URL → graph
+    ai.ts          Claude calls: block names, notes, feature groups (cached on disk)
+    settings.ts    API key (encrypted with the OS keychain), model, theme
+    pipeline.ts    the whole flow: source files → graph
   preload/         the safe bridge the screen uses to ask the Node side for things
-  renderer/        the screen (React)
-    src/components SidePanel, Diagram, the file/function/block boxes
-    src/layout     positions boxes (blocks stacked in run order, files arranged by ELK)
+  renderer/        the screen (React + React Flow)
+    src/components side panel, diagram, boxes, hover card, code viewer, settings, legend
+    src/layout     positions boxes in a web worker (ELK arranges files, blocks are stacked in run order)
+    src/lib        graph index, search, step-through order
   shared/types.ts  the data shapes both sides agree on
 resources/         Tree-sitter WebAssembly files (Python grammar)
+build/icon.png     app icon
 samples/           a tiny to-do app used by the tests
-tests/             parser and link tests
+tests/             parser and layout tests
 ```
 
-## Limits (on purpose, for now)
+## Limits (on purpose)
 
 - Python only. Zips over 60 MB, single files over 1 MB and folders like `venv/` or `site-packages/` are skipped.
-- A call on a variable (`store.add()`) gets no link, because knowing what `store` is would mean running the code.
-
-## Roadmap
-
-1. ✅ Repo download + parser + blocks + hard links on screen
-2. Block names and hover notes from Claude, click a block to see its code
-3. AI-guessed feature links (dashed), zoom levels, search
-4. Step-through mode in run order, demo polish
+- A call on a variable (`store.add()`) gets no solid link, because knowing what `store` is would mean running the code.
+  Claude's dashed links help fill that gap, and they are always marked as guesses.
