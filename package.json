@@ -1,0 +1,63 @@
+{
+  "name": "code-map",
+  "version": "0.1.0",
+  "description": "Turn a Python GitHub repo into an interactive diagram",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "dist:win": "electron-vite build && electron-builder --win"
+  },
+  "author": "Nawaf",
+  "license": "MIT",
+  "dependencies": {
+    "@xyflow/react": "^13.0.3",
+    "adm-zip": "^0.6.1",
+    "elkjs": "^0.12.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "web-tree-sitter": "^0.25.10"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^26.6.6",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  },
+  "private": true,
+  "build": {
+    "appId": "dev.codemap.app",
+    "productName": "Code Map",
+    "files": [
+      "out/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "wasm",
+        "filter": [
+          "*.wasm"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}

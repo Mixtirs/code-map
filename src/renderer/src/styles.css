@@ -1,0 +1,163 @@
+/* Warm dark theme, close to claude.ai */
+:root {
+  --bg: #262624;
+  --panel: #1f1e1d;
+  --panel-2: #2b2a27;
+  --border: #3d3c38;
+  --text: #f0eee6;
+  --muted: #a6a39a;
+  --accent: #d97757;
+  --accent-2: #c6613f;
+  --file: #2f2e2b;
+  --function: #383733;
+  --block: #44433e;
+  --link-import: #7aa2f7;
+  --link-call: #e0af68;
+  --danger: #f28b82;
+  --radius: 10px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; }
+body { background: var(--bg); overflow: hidden; }
+a { color: var(--text); }
+button { font: inherit; color: inherit; }
+
+.app { display: flex; height: 100vh; }
+
+/* ---------- Side panel ---------- */
+.panel {
+  width: 20%;
+  min-width: 280px;
+  max-width: 360px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.panel-closed { width: 52px; min-width: 52px; align-items: center; padding-top: 12px; }
+.panel-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 6px; }
+.brand { font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.brand-mark { color: var(--accent); }
+.panel-section { padding: 12px 14px; border-bottom: 1px solid #2c2b28; display: flex; flex-direction: column; gap: 8px; }
+.panel-spacer { flex: 1; }
+.panel-placeholder { border-top: 1px solid #2c2b28; border-bottom: none; opacity: 0.7; }
+.section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.section-label a { text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--text); }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+
+.url-row { display: flex; gap: 6px; }
+.input {
+  flex: 1; min-width: 0;
+  background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; color: var(--text); font-size: 13px; outline: none;
+}
+.input:focus { border-color: var(--accent); }
+.btn {
+  background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 10px; cursor: pointer; font-size: 13px;
+}
+.btn:hover:not(:disabled) { background: #34332f; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn-primary:hover:not(:disabled) { background: var(--accent-2); }
+.btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.icon-btn { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; padding: 4px 8px; border-radius: 6px; }
+.icon-btn:hover { background: var(--panel-2); color: var(--text); }
+.link-btn { background: none; border: none; color: var(--accent); cursor: pointer; padding: 0 4px; font-size: 12px; text-align: left; }
+.examples { font-size: 12px; color: var(--muted); }
+
+.progress { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.progress-bar { height: 4px; background: var(--panel-2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); transition: width 0.2s; }
+.error { color: var(--danger); font-size: 13px; background: rgba(242, 139, 130, 0.08); border-radius: 8px; padding: 8px; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.stat { background: var(--panel-2); border-radius: 8px; padding: 6px; text-align: center; }
+.stat-n { font-weight: 600; font-size: 15px; }
+.stat-l { font-size: 11px; color: var(--muted); }
+
+.toggle-row { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+.toggle-row.disabled { opacity: 0.45; cursor: default; }
+.toggle-label { flex: 1; }
+.swatch { width: 18px; height: 3px; border-radius: 2px; }
+.swatch.dashed { background: repeating-linear-gradient(90deg, var(--muted) 0 4px, transparent 4px 7px); }
+.warnings { margin: 0; padding-left: 18px; font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+
+/* ---------- Diagram ---------- */
+.diagram { flex: 1; position: relative; min-width: 0; }
+.diagram .react-flow { background: var(--bg); }
+.diagram-busy {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
+  padding: 4px 12px; font-size: 12px; color: var(--muted);
+}
+.empty { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+.empty-mark { font-size: 40px; color: var(--accent); }
+.empty h1 { font-weight: 500; font-size: 26px; margin: 12px 0 8px; }
+.empty p { color: var(--muted); max-width: 460px; line-height: 1.5; }
+
+.react-flow__node { font-size: 12px; }
+.react-flow__node.selected > .node { outline: 2px solid var(--accent); outline-offset: 1px; }
+.handle { opacity: 0; width: 6px; height: 6px; min-width: 0; min-height: 0; border: none; pointer-events: none; }
+
+.node { width: 100%; height: 100%; border-radius: var(--radius); border: 1px solid var(--border); color: var(--text); cursor: pointer; }
+.node.is-highlight { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(217, 119, 87, 0.35); }
+.node-head { display: flex; align-items: center; gap: 6px; padding: 8px 10px; }
+.node-text { min-width: 0; flex: 1; }
+.node-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.node-sub { color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.node-icon { font-size: 14px; }
+.fn-icon { color: var(--accent); font-style: italic; font-weight: 700; font-family: Georgia, serif; }
+.count { background: var(--block); border-radius: 10px; padding: 1px 7px; font-size: 11px; color: var(--muted); }
+.badge-warn { margin-left: 6px; background: #8a5a2b; color: #fff; border-radius: 8px; padding: 0 5px; font-size: 10px; }
+
+.node-file { background: rgba(47, 46, 43, 0.6); border-width: 1.5px; }
+.node-file .node-title { font-size: 14px; }
+.node-function { background: var(--function); }
+.node-block { background: var(--block); border-radius: 7px; }
+.node-block.is-open { background: rgba(68, 67, 62, 0.45); }
+.block-row { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; }
+.block-icon { width: 14px; text-align: center; color: var(--muted); }
+.block-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Cascadia Code', Consolas, ui-monospace, monospace; font-size: 11.5px; }
+.block-lines { color: var(--muted); font-size: 10.5px; }
+
+/* Colour stripe per kind of step */
+.node-block { border-left-width: 3px; }
+.kind-simple { border-left-color: #6b6a64; }
+.kind-if, .kind-match { border-left-color: #bb9af7; }
+.kind-for, .kind-while { border-left-color: #7dcfff; }
+.kind-try { border-left-color: #f7768e; }
+.kind-with { border-left-color: #9ece6a; }
+.kind-branch { border-left-color: transparent; background: rgba(255, 255, 255, 0.03); border-style: dashed; }
+.kind-def { border-left-color: var(--accent); }
+
+.chevron { background: none; border: none; cursor: pointer; color: var(--muted); padding: 0 2px; width: 16px; font-size: 12px; }
+.chevron:hover { color: var(--text); }
+
+.link-dim path.react-flow__edge-path { opacity: 0.12; }
+.link-selected path.react-flow__edge-path { stroke-width: 2.5 !important; }
+.react-flow__edge-text { fill: var(--text); font-size: 11px; }
+.react-flow__edge-textbg { fill: var(--panel); }
+.react-flow__minimap { background: var(--panel); border-radius: 8px; }
+.react-flow__controls button { background: var(--panel); border-color: var(--border); color: var(--text); fill: var(--text); }
+
+/* React Flow's own dark mode is cooler and darker than ours; use our colours. */
+.react-flow.dark {
+  --xy-background-color: var(--bg);
+  --xy-background-pattern-color: #3a3935;
+  --xy-node-background-color: transparent;
+  --xy-node-border: none;
+  --xy-minimap-background-color: var(--panel);
+  --xy-controls-button-background-color: var(--panel);
+  --xy-controls-button-background-color-hover: var(--panel-2);
+  --xy-controls-button-border-color: var(--border);
+}
+.react-flow__node-file, .react-flow__node-function, .react-flow__node-block { padding: 0; border: none; background: transparent; }
+/* Links are drawn above boxes so they stay visible; let clicks pass through them. */
+.react-flow__edges, .react-flow__edge, .react-flow__edge-interaction { pointer-events: none !important; }
