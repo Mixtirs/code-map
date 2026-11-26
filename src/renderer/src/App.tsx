@@ -299,7 +299,6 @@ export default function App() {
         onFolder={openFolder}
         level={level}
         onLevel={chooseLevel}
-        onFit={() => setFitKey((k) => k + 1)}
         toggles={toggles}
         onToggles={setToggles}
         query={query}

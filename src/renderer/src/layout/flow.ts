@@ -116,7 +116,7 @@ export function buildFlow(
       animated: touches && e.kind !== 'logical',
       label: showLabel ? label : undefined,
       className: `link link-${e.kind}${focusOn ? (touches ? ' link-selected' : ' link-dim') : ''}`,
-      style: { stroke: color, strokeWidth: e.kind === 'import' ? 2 : 1.6, strokeDasharray: e.kind === 'logical' ? '7 5' : undefined },
+      style: { stroke: color, strokeWidth: e.kind === 'import' ? 2.6 : e.kind === 'call' ? 1.2 : 1.6, strokeDasharray: e.kind === 'logical' ? '7 5' : undefined },
       markerEnd: e.kind === 'logical' ? undefined : { type: MarkerType.ArrowClosed, color, width: 16, height: 16 }
     })
   }

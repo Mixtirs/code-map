@@ -203,8 +203,8 @@ select.input { cursor: pointer; }
 .toggle-row.disabled { opacity: 0.45; cursor: default; }
 .toggle-label { flex: 1; }
 .swatch { width: 20px; height: 3px; border-radius: 2px; }
-.swatch-import { background: var(--link-import); }
-.swatch-call { background: var(--link-call); }
+.swatch-import { background: var(--link-import); height: 4px; }
+.swatch-call { background: var(--link-call); height: 1.5px; }
 .swatch-logical { background: repeating-linear-gradient(90deg, var(--link-ai) 0 5px, transparent 5px 8px); }
 
 .hits { display: flex; flex-direction: column; max-height: 240px; overflow: auto; margin: 0 -6px; }
@@ -402,6 +402,15 @@ select.input { cursor: pointer; }
 .kind-swatch-def { border-color: var(--kind-def); }
 .legend-sep { height: 1px; background: var(--border-soft); margin: 2px 0; }
 .legend-line { width: 18px; height: 3px; border-radius: 2px; }
+.legend-line.line-import { height: 4px; background: var(--link-import); }
+.legend-line.line-call { height: 1.5px; background: var(--link-call); }
+.legend-icon { flex: none; }
+.kind-ink-simple { color: var(--kind-simple); }
+.kind-ink-if { color: var(--kind-if); }
+.kind-ink-for { color: var(--kind-for); }
+.kind-ink-try { color: var(--kind-try); }
+.kind-ink-with { color: var(--kind-with); }
+.kind-ink-def { color: var(--kind-def); }
 .legend-line.dashed { background: repeating-linear-gradient(90deg, var(--link-ai) 0 5px, transparent 5px 8px); }
 
 /* ---------- Empty state & tips ---------- */
@@ -409,6 +418,7 @@ select.input { cursor: pointer; }
 .empty-mark { font-size: 44px; color: var(--accent); }
 .empty h1 { font-weight: 600; font-size: 28px; margin: 10px 0 8px; letter-spacing: -0.015em; }
 .empty-lead { color: var(--muted); max-width: 520px; line-height: 1.5; margin: 0 0 24px; }
+.steps-list { margin: 0 0 24px; padding-left: 22px; max-width: 520px; text-align: left; color: var(--muted); font-size: 14px; line-height: 1.55; display: flex; flex-direction: column; gap: 6px; }
 .steps-cards { list-style: none; padding: 0; margin: 0 0 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 12px; }
 .steps-cards li { background: var(--panel); border: 1px solid var(--border-soft); border-radius: 12px; padding: 16px; text-align: left; display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 1.45; }
 .steps-cards li svg { color: var(--accent); }

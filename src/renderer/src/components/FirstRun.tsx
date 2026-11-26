@@ -1,4 +1,4 @@
-import { FolderOpen, GitFork, MousePointerClick, Sparkles } from 'lucide-react'
+import { FolderOpen, MousePointerClick } from 'lucide-react'
 
 /** What a beginner sees before any repo is open. */
 export function EmptyState({ onExample, onFolder }: { onExample: (url: string) => void; onFolder: () => void }) {
@@ -7,22 +7,10 @@ export function EmptyState({ onExample, onFolder }: { onExample: (url: string) =
       <div className="empty-mark">◆</div>
       <h1>See how a Python project fits together</h1>
       <p className="empty-lead">Code Map turns code into boxes you can open, follow and read, without running anything.</p>
-      <ol className="steps-cards">
-        <li>
-          <GitFork size={20} />
-          <b>1. Open some code</b>
-          <span>Paste a public GitHub link on the left, or open a folder on this computer.</span>
-        </li>
-        <li>
-          <MousePointerClick size={20} />
-          <b>2. Explore</b>
-          <span>Each file is a box, each function a card. Click ▸ to open one, click any box to read its code.</span>
-        </li>
-        <li>
-          <Sparkles size={20} />
-          <b>3. Ask Claude</b>
-          <span>Add an API key in Settings and press “Explain with Claude” for plain-English notes.</span>
-        </li>
+      <ol className="steps-list">
+        <li>Paste a public GitHub link on the left, or open a folder on this computer.</li>
+        <li>Each file is a box and each function a card. Click ▸ to open one, click a box to read its code.</li>
+        <li>Optional: add a Claude API key in Settings for plain-English notes on every box.</li>
       </ol>
       <div className="empty-actions">
         <button className="btn btn-primary" onClick={() => onExample('https://github.com/pallets/itsdangerous')}>

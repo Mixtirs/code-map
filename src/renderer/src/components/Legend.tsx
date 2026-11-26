@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { LEGEND } from './kinds'
+import { KIND_META, LEGEND } from './kinds'
 
 /** Small key in the corner: what the colours and lines mean. */
 export function Legend({ aiOn }: { aiOn: boolean }) {
@@ -26,18 +26,21 @@ export function Legend({ aiOn }: { aiOn: boolean }) {
       </button>
       {open && (
         <div className="legend-body">
-          {LEGEND.map((row) => (
-            <div key={row.label} className="legend-row" title={row.hint}>
-              <span className={`legend-swatch kind-swatch-${row.kinds[0]}`} />
-              {row.label}
-            </div>
-          ))}
+          {LEGEND.map((row) => {
+            const Icon = KIND_META[row.kinds[0]].icon
+            return (
+              <div key={row.label} className="legend-row" title={row.hint}>
+                <Icon className={`legend-icon kind-ink-${row.kinds[0]}`} size={13} />
+                {row.label}
+              </div>
+            )
+          })}
           <div className="legend-sep" />
           <div className="legend-row">
-            <span className="legend-line" style={{ background: 'var(--link-import)' }} /> Imports a file
+            <span className="legend-line line-import" /> Imports a file
           </div>
           <div className="legend-row">
-            <span className="legend-line" style={{ background: 'var(--link-call)' }} /> Calls a function
+            <span className="legend-line line-call" /> Calls a function
           </div>
           <div className={`legend-row ${aiOn ? '' : 'muted'}`}>
             <span className="legend-line dashed" /> AI-guessed feature

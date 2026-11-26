@@ -3,17 +3,11 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Eye,
   FolderOpen,
-  Footprints,
-  GitFork,
-  Link2,
-  Maximize,
   Moon,
   PanelLeftClose,
   PanelLeftOpen,
   Play,
-  Search,
   Settings as SettingsIcon,
   Sparkles,
   Square,
@@ -48,7 +42,6 @@ interface Props {
   // view
   level: Level | null
   onLevel: (l: Level) => void
-  onFit: () => void
   toggles: LinkToggles
   onToggles: (t: LinkToggles) => void
   // search
@@ -118,8 +111,7 @@ export function SidePanel(p: Props) {
       <div className="panel-scroll">
         {/* ---------- Open code ---------- */}
         <section className="panel-section">
-          <h3 className="section-label">
-            <GitFork size={13} /> Open code
+          <h3 className="section-label">Open code
           </h3>
           <div className="url-row">
             <input
@@ -175,11 +167,8 @@ export function SidePanel(p: Props) {
                     </span>
                   )}
                 </div>
-                <div className="stats">
-                  <Stat n={g.stats.files} label="files" />
-                  <Stat n={g.stats.functions} label="functions" />
-                  <Stat n={g.stats.blocks} label="blocks" />
-                  <Stat n={g.stats.importLinks + g.stats.callLinks} label="links" />
+                <div className="muted small">
+                  {plural(g.stats.files, 'file')} · {plural(g.stats.functions, 'function')}
                 </div>
                 {g.warnings.length > 0 && (
                   <>
@@ -200,8 +189,7 @@ export function SidePanel(p: Props) {
 
             {/* ---------- Search ---------- */}
             <section className="panel-section">
-              <h3 className="section-label">
-                <Search size={13} /> Search
+              <h3 className="section-label">Search
               </h3>
               <input
                 id="search"
@@ -230,8 +218,7 @@ export function SidePanel(p: Props) {
 
             {/* ---------- View ---------- */}
             <section className="panel-section">
-              <h3 className="section-label">
-                <Eye size={13} /> Zoom level
+              <h3 className="section-label">Zoom level
               </h3>
               <div className="segmented">
                 {(['files', 'functions', 'blocks'] as const).map((l) => (
@@ -239,12 +226,8 @@ export function SidePanel(p: Props) {
                     {l === 'files' ? 'Files' : l === 'functions' ? 'Functions' : 'Blocks'}
                   </button>
                 ))}
-                <button onClick={p.onFit} title="Fit the whole map on screen" aria-label="Fit">
-                  <Maximize size={14} />
-                </button>
               </div>
-              <h3 className="section-label">
-                <Link2 size={13} /> Links
+              <h3 className="section-label">Links
               </h3>
               <Toggle on={p.toggles.import} onChange={(v) => p.onToggles({ ...p.toggles, import: v })} cls="import" label="Imports" count={g.stats.importLinks} />
               <Toggle on={p.toggles.call} onChange={(v) => p.onToggles({ ...p.toggles, call: v })} cls="call" label="Function calls" count={g.stats.callLinks} />
@@ -260,8 +243,7 @@ export function SidePanel(p: Props) {
 
             {/* ---------- AI ---------- */}
             <section className="panel-section">
-              <h3 className="section-label">
-                <Sparkles size={13} /> Claude notes
+              <h3 className="section-label">Claude notes
               </h3>
               {!p.settings?.hasApiKey ? (
                 <div className="empty-mini">
@@ -318,8 +300,7 @@ export function SidePanel(p: Props) {
 
             {/* ---------- Step-through ---------- */}
             <section className="panel-section">
-              <h3 className="section-label">
-                <Footprints size={13} /> Step through
+              <h3 className="section-label">Step through
               </h3>
               {!p.steps ? (
                 <>
@@ -370,14 +351,7 @@ export function SidePanel(p: Props) {
   )
 }
 
-function Stat({ n, label }: { n: number; label: string }) {
-  return (
-    <div className="stat">
-      <div className="stat-n">{n.toLocaleString()}</div>
-      <div className="stat-l">{label}</div>
-    </div>
-  )
-}
+const plural = (n: number, word: string) => `${n.toLocaleString()} ${word}${n === 1 ? '' : 's'}`
 
 function Toggle(props: { on: boolean; onChange: (v: boolean) => void; cls: string; label: string; count: number; disabled?: boolean }) {
   return (
