@@ -1,6 +1,9 @@
-# Code Map
+# Foothold
 
-Code mapping app that extracts GitHub code and maps the code to make it easier to debug and understand.
+**Foothold turns a Python project into a map of boxes you can open and follow, so beginners who are afraid of real code
+can see how it fits together before they read a single line.**
+
+(The project was called "Code Map" while we built it. Brand notes: [brand/BRAND.md](brand/BRAND.md).)
 
 A desktop app (Windows and Mac) that turns a Python project, from GitHub or from your own computer,
 into an interactive diagram, so you can see how the code fits together without reading every line.
