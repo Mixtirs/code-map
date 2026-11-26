@@ -42,7 +42,7 @@ npm run dev
 | `npm test` | Runs the parser and layout tests |
 | `npm run typecheck` | Checks the TypeScript for mistakes |
 | `npm run dist:win` | Windows installer and portable `.exe` into `release/` (run on Windows) |
-| `npm run dist:mac` | Mac `.dmg` and `.zip` with `Code Map.app` into `release/` (run on a Mac) |
+| `npm run dist:mac` | Mac `.dmg` and `.zip` with `Foothold.app` into `release/` (run on a Mac) |
 
 You can also build both on GitHub: Actions tab, **Build apps**, **Run workflow**. See HANDOFF.md.
 

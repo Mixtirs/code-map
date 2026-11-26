@@ -1,12 +1,13 @@
 import { FolderOpen, MousePointerClick } from 'lucide-react'
+import { AppIcon } from './Brand'
 
 /** What a beginner sees before any repo is open. */
 export function EmptyState({ onExample, onFolder }: { onExample: (url: string) => void; onFolder: () => void }) {
   return (
     <div className="empty">
-      <div className="empty-mark">◆</div>
+      <AppIcon className="empty-mark" />
       <h1>See how a Python project fits together</h1>
-      <p className="empty-lead">Code Map turns code into boxes you can open, follow and read, without running anything.</p>
+      <p className="empty-lead">Foothold turns code into boxes you can open, follow and read, without running anything.</p>
       <ol className="steps-list">
         <li>Paste a public GitHub link on the left, or open a folder on this computer.</li>
         <li>Each file is a box and each function a card. Click ▸ to open one, click a box to read its code.</li>

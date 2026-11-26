@@ -19,6 +19,7 @@ import type { LinkToggles } from '../layout/flow'
 import type { SearchHit } from '../lib/search'
 import type { Step } from '../lib/steps'
 import { titleOf, type GraphIndex } from '../lib/graph'
+import { Wordmark } from './Brand'
 
 export type Level = 'files' | 'functions' | 'blocks'
 
@@ -93,7 +94,7 @@ export function SidePanel(p: Props) {
     <aside className="panel" style={{ width: p.width }}>
       <div className="panel-top">
         <div className="brand">
-          <span className="brand-mark">◆</span> Code Map
+          <Wordmark />
         </div>
         <div className="top-actions">
           <button className="icon-btn" title={p.dark ? 'Light theme' : 'Dark theme'} aria-label="Switch theme" onClick={p.onThemeToggle}>

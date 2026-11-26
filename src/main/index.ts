@@ -21,8 +21,8 @@ function createWindow() {
     height: 900,
     minWidth: 960,
     minHeight: 600,
-    title: 'Code Map',
-    backgroundColor: nativeTheme.shouldUseDarkColors ? '#262624' : '#faf9f5',
+    title: 'Foothold',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#2b3040' : '#e9ebf2',
     autoHideMenuBar: true,
     icon: join(__dirname, '../../build/icon.png'),
     webPreferences: {

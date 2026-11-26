@@ -1,6 +1,6 @@
-# Code Map: handoff notes
+# Foothold: handoff notes
 
-Everything you need to finish, build and demo Code Map on your own. Last updated Tue 24 Nov 2026.
+Everything you need to finish, build and demo Foothold (called Code Map while we built it) on your own. Last updated Tue 24 Nov 2026.
 
 ## Status
 
@@ -39,8 +39,8 @@ npm install
 npm run dist:win
 ```
 
-You get `release\Code Map Setup 0.1.0.exe` (installer, adds a desktop and Start menu shortcut) and
-`release\Code Map 0.1.0.exe` (portable, runs without installing).
+You get `release\Foothold Setup 0.1.0.exe` (installer, adds a desktop and Start menu shortcut) and
+`release\Foothold 0.1.0.exe` (portable, runs without installing).
 Windows may say "Windows protected your PC" because the app isn't signed: click **More info**, then **Run anyway**.
 
 **Mac** (Terminal, inside the `code-map` folder):
@@ -50,13 +50,13 @@ npm install
 npm run dist:mac
 ```
 
-You get a `.dmg` file (such as `release/Code Map-0.1.0-arm64.dmg`) and a `.zip`.
-Open the `.dmg` and drag **Code Map** to **Applications**.
+You get a `.dmg` file (such as `release/Foothold-0.1.0-arm64.dmg`) and a `.zip`.
+Open the `.dmg` and drag **Foothold** to **Applications**.
 The app isn't signed, so the first time, right-click it in Applications and choose **Open**, then **Open** again.
 If macOS says the app "is damaged", run this once and try again:
 
 ```bash
-xattr -cr "/Applications/Code Map.app"
+xattr -cr "/Applications/Foothold.app"
 ```
 
 **Without either computer: build on GitHub.** The repo has a workflow (`.github/workflows/build.yml`) that builds both.

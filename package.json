@@ -1,7 +1,7 @@
 {
   "name": "code-map",
   "version": "0.1.0",
-  "description": "Turn a Python GitHub repo into an interactive diagram",
+  "description": "Foothold: see how a Python project fits together before you read a line",
   "main": "out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",
@@ -22,6 +22,8 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "@types/adm-zip": "^0.5.8",
     "@types/node": "^26.6.6",
     "@types/react": "^18.3.31",
@@ -43,7 +45,7 @@
   "private": true,
   "build": {
     "appId": "dev.codemap.app",
-    "productName": "Code Map",
+    "productName": "Foothold",
     "files": [
       "out/**/*"
     ],
@@ -73,7 +75,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Code Map"
+      "shortcutName": "Foothold"
     },
     "mac": {
       "target": [
@@ -85,7 +87,7 @@
       "identity": null
     },
     "dmg": {
-      "title": "Code Map"
+      "title": "Foothold"
     }
   }
 }
