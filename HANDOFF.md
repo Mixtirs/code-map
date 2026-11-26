@@ -15,6 +15,12 @@ Everything you need to finish, build and demo Foothold (called Code Map while we
 | 6 | Packaging: Windows installer, Mac `.app`, app icon, GitHub build | ✅ done, **the installers have not been built yet (see below)** |
 | 7 | This file | ✅ done |
 
+## The new name (26 Nov)
+
+The app is now called **Foothold**, with a new look and icon. Brand notes, the review results and the link to the brand
+guide are in [brand/BRAND.md](brand/BRAND.md). One side effect: an installed app keeps its settings in a folder named
+after the app, so after installing the new build, paste your Claude API key into Settings once more.
+
 ## First things to check on your laptop
 
 These could not be tested in the cloud, where GitHub zip downloads are blocked and there is no API key.

@@ -59,3 +59,17 @@ Every other shade is a mix of two of these four. Fonts: **IBM Plex Mono** (headi
 | No "3 cards with icons" layout | Failed: the start screen had exactly that. | Fixed in step 2: a plain numbered list. |
 | No glass or glow without a reason | Failed: inputs had a glow ring on focus, selected boxes had a glow ring, and the current step pulsed with a glow. | Focus is now a Lavender border. Selection is a solid outline, search hits a dashed outline, the current step a Lavender fill. No glow, no pulse. |
 | Looks like ours, not every AI app | Failed: Claude's notes were marked with the ✨ sparkles icon that every AI app uses, and the old orange-on-charcoal theme looked like a chat app. | AI text now wears a small dashed **AI** tag, the same dash as AI-guessed links on the map, so "dashed = guessed by AI" is one rule across the app. Own wordmark, own icon, Slate + Lavender. |
+
+## Final check before submission (26 Nov 2026)
+
+Every button, toggle and link in the app was clicked by an automated run of the real app (26 checks, all passing after
+the fix below): theme switch, hide/show panel, Settings (open, Cancel, Esc, Save, theme, add and remove key),
+a bad link (clear error), "Try an example repo", the first-map tip, legend fold, Files / Functions / Blocks,
+link toggles, ▸ on a box, click a box for code and close it, hover note, search and jump, step-through
+(start, next, back, stop), map zoom and fit, "Explain with Claude" with a wrong key (clear message), and Open a folder.
+
+| Question | Answer | Notes |
+| --- | --- | --- |
+| Is it clear what to do on every screen? | Yes | Start screen has a numbered list and one Lavender button, the map shows a one-time tip, the hover card ends with "Click to see the code", errors say how to fix them. |
+| Does every element have a reason to be there? | Yes | Checked in the black-and-white review: extra icons, stats and the duplicate fit button were removed. |
+| Does everything clickable work? | Yes, after one fix | It was **No**: after opening a box with ▸ and then picking a zoom level, the map stayed zoomed in on the old spot instead of showing the whole map. Fixed: the map now fits again once the new layout is ready. |

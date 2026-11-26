@@ -54,13 +54,28 @@ export function Diagram(p: Props) {
   // Move the view: fit everything, or centre on one box. When the box was just
   // opened, wait for the new layout so we centre on where it really ends up.
   const focusLayout = useRef<{ key: number; layout: LayoutResult | null } | null>(null)
+  // A fit asked for together with a new zoom level runs again once the new
+  // layout arrives, so it fits the boxes that are really on screen.
+  const fitPending = useRef<LayoutResult | null>(null)
   useEffect(() => {
     if (!p.layout) return
+    const fit = () => requestAnimationFrame(() => flow.fitView({ padding: 0.08, duration: 350 }))
     if (lastFit.current !== p.fitKey) {
       lastFit.current = p.fitKey
-      requestAnimationFrame(() => flow.fitView({ padding: 0.08, duration: 350 }))
+      fitPending.current = p.layout
+      if (p.focus) lastFocus.current = p.focus.key // a fit replaces any older "go to this box"
+      fit()
       return
     }
+    const newFocus = !!p.focus && lastFocus.current !== p.focus.key
+    if (fitPending.current && !newFocus) {
+      if (fitPending.current !== p.layout) {
+        fitPending.current = null
+        fit()
+      }
+      return
+    }
+    fitPending.current = null
     if (!p.focus || lastFocus.current === p.focus.key) return
     if (p.focus.waitLayout) {
       if (focusLayout.current?.key !== p.focus.key) {
