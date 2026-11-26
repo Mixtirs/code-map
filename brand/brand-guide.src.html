@@ -1,0 +1,488 @@
+<title>Foothold Brand Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one long reference sheet, sections stacked, each a flat card on the slate ground. */
+:root {
+  /* The four brand colours. Nothing else is allowed; every other shade is a mix of two of these. */
+  --slate: #2B3040;
+  --mist: #E9EBF2;
+  --steel: #7A8297;
+  --lav: #A396E6;
+
+  --head: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* dark is the home theme */
+  color-scheme: dark;
+  --bg: var(--slate);
+  --fg: var(--mist);
+  --card: color-mix(in srgb, var(--slate) 92%, var(--mist));
+  --card-2: color-mix(in srgb, var(--slate) 85%, var(--mist));
+  --line: color-mix(in srgb, var(--slate) 55%, var(--steel));
+  --muted: color-mix(in srgb, var(--mist) 62%, var(--steel));
+  --shadow: 0 6px 18px color-mix(in srgb, var(--slate) 40%, black 60%);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: color-mix(in srgb, var(--mist) 92%, var(--slate));
+    --fg: var(--slate);
+    --card: var(--mist);
+    --card-2: color-mix(in srgb, var(--mist) 94%, var(--slate));
+    --line: color-mix(in srgb, var(--mist) 55%, var(--steel));
+    --muted: color-mix(in srgb, var(--slate) 70%, var(--steel));
+    --shadow: 0 6px 18px color-mix(in srgb, var(--slate) 14%, transparent);
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: color-mix(in srgb, var(--mist) 92%, var(--slate));
+  --fg: var(--slate);
+  --card: var(--mist);
+  --card-2: color-mix(in srgb, var(--mist) 94%, var(--slate));
+  --line: color-mix(in srgb, var(--mist) 55%, var(--steel));
+  --muted: color-mix(in srgb, var(--slate) 70%, var(--steel));
+  --shadow: 0 6px 18px color-mix(in srgb, var(--slate) 14%, transparent);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 80px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2, h3 { font-family: var(--head); font-weight: 600; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font-size: 22px; }
+h3 { font-size: 14px; font-weight: 500; color: var(--muted); }
+p { margin: 0; max-width: 64ch; }
+code, .mono { font-family: var(--head); font-size: 0.92em; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+a { color: var(--fg); text-decoration-color: var(--lav); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--lav); outline-offset: 2px; }
+
+.sec { background: var(--card); border-radius: 10px; box-shadow: var(--shadow); padding: 28px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sec-num { font-family: var(--head); color: var(--steel); font-size: 13px; }
+
+/* ---------- wordmark ---------- */
+.wm { font-family: var(--head); font-weight: 600; letter-spacing: -0.03em; white-space: nowrap; }
+.wm .o { display: inline-block; width: 0.5em; height: 0.5em; border: 0.085em solid currentColor; border-radius: 0.09em; margin: 0 0.035em; vertical-align: -0.02em; }
+.wm .o.on { background: var(--lav); border-color: var(--lav); }
+
+/* ---------- hero ---------- */
+.hero { display: flex; flex-direction: column; gap: 14px; padding: 8px 0 4px; }
+.hero .wm { font-size: clamp(44px, 9vw, 84px); line-height: 1; }
+.story { font-size: clamp(17px, 2.2vw, 21px); line-height: 1.5; max-width: 52ch; }
+.meta-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+
+/* ---------- moodboard ---------- */
+.mood { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.mood img { width: 100%; border-radius: 8px; display: block; }
+.take { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.take li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; align-items: center; }
+.chip { height: 44px; border-radius: 6px; }
+.left-out { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+
+/* ---------- colours ---------- */
+.swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.sw { border-radius: 8px; overflow: hidden; background: var(--card-2); display: flex; flex-direction: column; }
+.sw-fill { height: 110px; display: flex; align-items: flex-end; padding: 10px 12px; font-family: var(--head); font-size: 13px; }
+.sw-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.sw-name { font-family: var(--head); font-weight: 600; font-size: 14px; }
+.copy { font: 500 12px var(--head); background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 5px; padding: 2px 8px; cursor: pointer; align-self: flex-start; margin-top: 6px; }
+.copy:hover { border-color: var(--lav); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; font-size: 13px; width: 100%; min-width: 560px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--head); font-weight: 500; color: var(--muted); }
+.dot { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid var(--line); }
+
+/* ---------- type ---------- */
+.type-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.type-card { background: var(--card-2); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.type-sample { font-size: 34px; line-height: 1.15; }
+.scale { display: flex; flex-direction: column; gap: 6px; }
+.scale div { display: flex; gap: 14px; align-items: baseline; }
+.scale span:first-child { width: 72px; flex: none; font-family: var(--head); font-size: 12px; color: var(--muted); }
+
+/* ---------- logo ---------- */
+.logo-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+.logo-tile { border-radius: 8px; padding: 26px; display: flex; flex-direction: column; gap: 12px; justify-content: center; min-height: 150px; }
+.on-slate { background: var(--slate); color: var(--mist); }
+.on-mist { background: var(--mist); color: var(--slate); }
+.logo-tile .wm { font-size: clamp(34px, 6vw, 52px); }
+.icons { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+.icons figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; font: 12px var(--head); color: var(--muted); }
+.taskbar { display: flex; gap: 8px; align-items: center; background: color-mix(in srgb, var(--slate) 80%, black); border-radius: 8px; padding: 6px 10px; }
+.taskbar span { width: 18px; height: 18px; border-radius: 4px; background: color-mix(in srgb, var(--steel) 40%, var(--slate)); }
+
+/* ---------- UI kit (these are the app's real styles) ---------- */
+.kit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.kit-cell { background: var(--bg); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { font: 500 13px var(--body); display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; padding: 7px 12px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+.btn:hover { border-color: var(--steel); }
+.btn-primary { background: var(--lav); border-color: var(--lav); color: var(--slate); font-weight: 600; }
+.btn-primary:hover { background: color-mix(in srgb, var(--lav) 88%, var(--mist)); border-color: var(--lav); }
+.btn-quiet { background: transparent; border-color: transparent; color: var(--muted); }
+.btn-quiet:hover { color: var(--fg); border-color: var(--line); }
+.input { font: 13px var(--body); background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; width: 100%; outline: none; }
+.input:focus { border-color: var(--lav); }
+.label { font: 500 11px var(--head); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.ui-card { background: var(--card); border-radius: 8px; box-shadow: var(--shadow); padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.hover-card { background: var(--card); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; max-width: 320px; font-size: 13px; }
+.hc-top { display: flex; justify-content: space-between; font: 11px var(--head); color: var(--muted); }
+.hc-kind { text-transform: uppercase; letter-spacing: 0.08em; }
+.hc-title { font: 600 14px var(--head); }
+.hc-code { font: 12px var(--head); background: var(--card-2); padding: 3px 7px; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ai-tag { font: 500 10px var(--head); border: 1px dashed var(--lav); color: var(--fg); border-radius: 4px; padding: 0 4px; margin-right: 6px; letter-spacing: 0.04em; }
+.hc-meta { display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 6px; font-size: 11.5px; color: var(--muted); }
+
+/* diagram pieces */
+.fbox { border: 1.5px solid var(--line); border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 8px; background: color-mix(in srgb, var(--card) 50%, transparent); }
+.fbox-head { display: flex; gap: 6px; align-items: center; font: 600 13px var(--head); padding: 2px 4px; }
+.fn { background: var(--card); border-radius: 8px; box-shadow: var(--shadow); padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+.fn.sel { outline: 2px solid var(--lav); outline-offset: 2px; }
+.fn-head { display: flex; gap: 6px; align-items: center; }
+.fn-name { font: 600 12.5px var(--head); }
+.fn-sub { font-size: 11px; color: var(--muted); }
+.blk { display: flex; align-items: center; gap: 7px; background: var(--card-2); border-radius: 5px; border-left: 3px solid var(--steel); height: 30px; padding: 0 8px; font: 11.5px var(--head); min-width: 0; }
+.blk.step { border-left-color: var(--lav); background: color-mix(in srgb, var(--lav) 18%, var(--card-2)); }
+.blk span:nth-child(2) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.blk .n { color: var(--muted); font-size: 10.5px; }
+.ico { width: 14px; height: 14px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--muted); }
+.links { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; }
+.links div { display: flex; align-items: center; gap: 10px; }
+.ln { width: 30px; flex: none; }
+
+/* ---------- mockup ---------- */
+.scroll-x { overflow-x: auto; border-radius: 10px; }
+.mock { width: 980px; height: 600px; display: flex; border-radius: 10px; overflow: hidden; background: var(--slate); color: var(--mist); font-size: 12.5px;
+  --card: color-mix(in srgb, var(--slate) 92%, var(--mist)); --card-2: color-mix(in srgb, var(--slate) 85%, var(--mist));
+  --line: color-mix(in srgb, var(--slate) 55%, var(--steel)); --muted: color-mix(in srgb, var(--mist) 62%, var(--steel)); --fg: var(--mist); --bg: var(--slate);
+  --shadow: 0 6px 18px color-mix(in srgb, var(--slate) 40%, black 60%); }
+.m-panel { width: 270px; flex: none; background: color-mix(in srgb, var(--slate) 94%, var(--mist)); display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.m-top { display: flex; justify-content: space-between; align-items: center; padding: 14px 14px 8px 16px; }
+.m-top .wm { font-size: 19px; }
+.m-tools { display: flex; gap: 10px; color: var(--muted); }
+.m-sec { padding: 10px 16px; display: flex; flex-direction: column; gap: 7px; border-bottom: 1px solid var(--line); }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 6px; padding: 2px; gap: 2px; }
+.seg span { flex: 1; text-align: center; padding: 4px; border-radius: 4px; color: var(--muted); }
+.seg .on { background: var(--card-2); color: var(--fg); font-weight: 500; }
+.tg { display: flex; align-items: center; gap: 8px; }
+.box { width: 13px; height: 13px; border-radius: 3px; border: 1.5px solid var(--steel); }
+.box.on { background: var(--lav); border-color: var(--lav); }
+.m-map { flex: 1; position: relative; background-image: radial-gradient(circle, var(--line) 1px, transparent 1.3px); background-size: 22px 22px; }
+.m-map > * { position: absolute; }
+.m-legend { left: 14px; bottom: 14px; background: var(--card); border-radius: 8px; box-shadow: var(--shadow); padding: 10px 12px; display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; }
+.m-legend div { display: flex; gap: 8px; align-items: center; }
+
+/* ---------- social post ---------- */
+.post-wrap { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.post { aspect-ratio: 1; max-width: 100%; background: var(--slate); color: var(--mist); border-radius: 10px; padding: 7%; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; container-type: inline-size; }
+.post .wm { font-size: 6.5cqw; }
+.post h4 { font: 600 8.4cqw/1.08 var(--head); margin: 0; letter-spacing: -0.03em; }
+.post-img { background: color-mix(in srgb, var(--slate) 92%, var(--mist)); border-radius: 2cqw; box-shadow: 0 6px 18px color-mix(in srgb, var(--slate) 40%, black 60%); padding: 3cqw; }
+.post-img svg { width: 100%; display: block; }
+.post-cta { display: flex; justify-content: space-between; align-items: center; gap: 3cqw; font-size: 3.3cqw; }
+.post-cta b { background: var(--lav); color: var(--slate); border-radius: 1.2cqw; padding: 1.6cqw 3cqw; font-weight: 600; font-family: var(--body); white-space: nowrap; }
+.caption { background: var(--card-2); border-radius: 8px; padding: 16px; font-size: 14px; display: flex; flex-direction: column; gap: 10px; }
+
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 28px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.rules li { padding-left: 16px; position: relative; }
+.rules li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--steel); }
+.rules li.yes::before { background: var(--lav); }
+
+@media (max-width: 760px) {
+  .mood, .type-grid, .logo-grid, .kit, .post-wrap, .rules { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sec { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="app-icon" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="14" fill="#2B3040"/>
+      <path d="M21 34V21.5h13" stroke="#E9EBF2" stroke-width="4" fill="none" stroke-linejoin="round"/>
+      <rect x="12" y="34" width="18" height="18" rx="3.5" fill="#E9EBF2"/>
+      <rect x="34" y="12" width="18" height="18" rx="3.5" fill="#A396E6"/>
+    </symbol>
+    <symbol id="i-steps" viewBox="0 0 24 24"><path d="M21 6H3M15 12H3M17 18H3"/></symbol>
+    <symbol id="i-if" viewBox="0 0 24 24"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="i-try" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m10 13-2 2 2 2M14 17l2-2-2-2"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevr" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="wm" aria-label="Foothold">f<i class="o"></i><i class="o on"></i>thold</span>
+  <p class="story">Foothold turns a Python project into a map of boxes you can open and follow, so beginners who are afraid of real code can see how it fits together before they read a single line.</p>
+  <div class="meta-row"><span>Brand guide v1 · 26 Nov 2026</span><span>Desktop app for Windows and Mac</span><span>It never runs the code it shows</span></div>
+</header>
+
+<section class="sec" id="moodboard">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Moodboard</h2></div>
+  <div class="mood">
+    <img alt="Reference: a slate desktop with flat code windows and one lavender accent" src="data:image/jpeg;base64,MOOD_B64">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <h3>What we took from the reference</h3>
+      <ul class="take">
+        <li><div class="chip" style="background:var(--slate);border:1px solid var(--line)"></div><span>A muted slate ground, calm enough to sit behind a busy diagram for an hour.</span></li>
+        <li><div class="chip" style="background:var(--lav)"></div><span>One flat lavender, used only where your eye should go next.</span></li>
+        <li><div class="chip" style="background:var(--card-2);box-shadow:var(--shadow)"></div><span>Flat cards with small corners and a soft shadow. No borders fighting each other.</span></li>
+        <li><div class="chip mono" style="background:var(--card-2);display:grid;place-items:center;font-size:12px">def go()</div><span>Monospace for code, and for headings, so the app speaks the same language as the code it maps.</span></li>
+      </ul>
+      <p class="left-out">Left out on purpose: the wallpaper, the ASCII art, the layout and the extra pastel swatches. Four colours only.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="colours">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Colours</h2><span class="muted small">Exactly four. One accent, everything else calm.</span></div>
+  <div class="swatches">
+    <div class="sw"><div class="sw-fill" style="background:#2B3040;color:#E9EBF2">#2B3040</div><div class="sw-body"><span class="sw-name">Slate</span><span class="muted">Background (dark) · Text (light)</span><button class="copy" data-hex="#2B3040">Copy hex</button></div></div>
+    <div class="sw"><div class="sw-fill" style="background:#E9EBF2;color:#2B3040">#E9EBF2</div><div class="sw-body"><span class="sw-name">Mist</span><span class="muted">Text (dark) · Background (light)</span><button class="copy" data-hex="#E9EBF2">Copy hex</button></div></div>
+    <div class="sw"><div class="sw-fill" style="background:#7A8297;color:#E9EBF2">#7A8297</div><div class="sw-body"><span class="sw-name">Steel</span><span class="muted">Secondary: lines, icons, labels</span><button class="copy" data-hex="#7A8297">Copy hex</button></div></div>
+    <div class="sw"><div class="sw-fill" style="background:#A396E6;color:#2B3040">#A396E6</div><div class="sw-body"><span class="sw-name">Lavender</span><span class="muted">Accent: action, selection, AI</span><button class="copy" data-hex="#A396E6">Copy hex</button></div></div>
+  </div>
+  <p class="small muted">Both themes use the same four colours. Light swaps Slate and Mist. Card and border shades are mixes of two of the four (for example, a card is 92% Slate and 8% Mist), so no new colour ever appears.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Role</th><th>Dark theme</th><th>Light theme</th><th>Contrast</th></tr></thead>
+      <tbody>
+        <tr><td>Text</td><td><span class="dot" style="background:#E9EBF2"></span>Mist on Slate</td><td><span class="dot" style="background:#2B3040"></span>Slate on Mist</td><td class="mono">11.0 : 1</td></tr>
+        <tr><td>Secondary</td><td><span class="dot" style="background:#7A8297"></span>Steel</td><td><span class="dot" style="background:#7A8297"></span>Steel</td><td class="mono">3.3 : 1 (lines and icons only)</td></tr>
+        <tr><td>Accent</td><td><span class="dot" style="background:#A396E6"></span>Lavender fill or outline</td><td><span class="dot" style="background:#A396E6"></span>Lavender fill, Slate text on it</td><td class="mono">5.0 : 1 Slate on Lavender</td></tr>
+        <tr><td>Background</td><td><span class="dot" style="background:#2B3040"></span>Slate</td><td><span class="dot" style="background:#E9EBF2"></span>Mist</td><td class="mono">n/a</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec" id="type">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Fonts</h2><span class="muted small">Two families, both free (SIL Open Font License) and bundled inside the app.</span></div>
+  <div class="type-grid">
+    <div class="type-card">
+      <h3>Headings, code and the logo</h3>
+      <div class="type-sample" style="font-family:var(--head);font-weight:600">IBM Plex Mono</div>
+      <p class="small muted">Monospace, like the code itself. Used for titles, function names, code lines, labels and numbers.</p>
+      <code style="font-size:13px">def sign(self, value: bytes) -&gt; bytes:</code>
+    </div>
+    <div class="type-card">
+      <h3>Body text</h3>
+      <div class="type-sample" style="font-family:var(--body);font-weight:500">IBM Plex Sans</div>
+      <p class="small muted">Plain and easy to read at small sizes. Used for every sentence a person reads: notes, help, buttons.</p>
+      <p style="font-size:13px">Checks that the value was signed with this key.</p>
+    </div>
+  </div>
+  <div class="scale">
+    <div><span>28 / Mono</span><span style="font:600 28px/1.2 var(--head)">See the map first</span></div>
+    <div><span>17 / Mono</span><span style="font:600 17px var(--head)">Settings</span></div>
+    <div><span>13 / Sans</span><span style="font:13px var(--body)">Paste a public GitHub link, or open a folder on this computer.</span></div>
+    <div><span>11 / Mono</span><span class="label">Zoom level</span></div>
+  </div>
+</section>
+
+<section class="sec" id="logo">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Logo and app icon</h2></div>
+  <div class="logo-grid">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="logo-tile on-slate"><span class="wm" aria-label="Foothold">f<i class="o"></i><i class="o on"></i>thold</span></div>
+      <div class="logo-tile on-mist"><span class="wm" aria-label="Foothold">f<i class="o"></i><i class="o on"></i>thold</span></div>
+    </div>
+    <div class="logo-tile" style="background:var(--card-2);gap:18px">
+      <div class="icons">
+        <figure><svg width="96" height="96"><use href="#app-icon"/></svg>96</figure>
+        <figure><svg width="48" height="48"><use href="#app-icon"/></svg>48</figure>
+        <figure><svg width="32" height="32"><use href="#app-icon"/></svg>32</figure>
+        <figure><svg width="16" height="16"><use href="#app-icon"/></svg>16</figure>
+      </div>
+      <div class="taskbar" aria-label="The icon in a taskbar"><span></span><svg width="22" height="22"><use href="#app-icon"/></svg><span></span><span></span></div>
+    </div>
+  </div>
+  <p class="small muted">The two o's are two boxes on the map: one you have read (outline) and the next one to open (Lavender). The icon is the same idea: two boxes and the link between them, a step up from where you stand. Keep the wordmark in Plex Mono SemiBold, lowercase. Below 24px, use the icon alone.</p>
+</section>
+
+<section class="sec" id="ui">
+  <div class="sec-head"><span class="sec-num">05</span><h2>UI elements</h2><span class="muted small">Four colours, two fonts. These match the app's real styles.</span></div>
+  <div class="kit">
+    <div class="kit-cell">
+      <span class="label">Buttons</span>
+      <div class="row"><button class="btn btn-primary">Try an example repo</button><button class="btn">Open a folder</button><button class="btn btn-quiet">Cancel</button></div>
+      <p class="small muted">One Lavender button per screen, for the main next step. Others are quiet.</p>
+    </div>
+    <div class="kit-cell">
+      <span class="label">Input</span>
+      <label for="demo-url" class="small">GitHub link</label>
+      <input id="demo-url" class="input" placeholder="https://github.com/owner/repo">
+      <p class="small muted">Focus shows a Lavender border. No glow ring.</p>
+    </div>
+    <div class="kit-cell">
+      <span class="label">Card</span>
+      <div class="ui-card"><span style="font:600 14px var(--head)">pallets/itsdangerous</span><span class="small muted">15 files · 114 functions</span></div>
+    </div>
+    <div class="kit-cell">
+      <span class="label">Hover card</span>
+      <div class="hover-card">
+        <div class="hc-top"><span class="hc-kind">Function</span><span>lines 72–110</span></div>
+        <div class="hc-title">Signer.sign</div>
+        <code class="hc-code">def sign(self, value)</code>
+        <p class="small"><span class="ai-tag">AI</span>Adds a signature to the value so you can tell later if anyone changed it.</p>
+        <div class="hc-meta"><span>called from 4 places</span><span>Click to see the code</span></div>
+      </div>
+    </div>
+    <div class="kit-cell" style="grid-column:1/-1">
+      <span class="label">Diagram blocks</span>
+      <div class="kit" style="gap:14px">
+        <div class="fbox">
+          <div class="fbox-head"><svg class="ico"><use href="#i-chev"/></svg><svg class="ico"><use href="#i-file"/></svg>signer.py</div>
+          <div class="fn sel">
+            <div class="fn-head"><svg class="ico"><use href="#i-chev"/></svg><span class="fn-name">Signer.sign</span></div>
+            <div class="blk"><svg class="ico"><use href="#i-steps"/></svg><span>value = want_bytes(value)</span><span class="n">2 lines</span></div>
+            <div class="blk step"><svg class="ico"><use href="#i-if"/></svg><span>if self.key_derivation …</span><span class="n">4 lines</span></div>
+            <div class="blk"><svg class="ico"><use href="#i-loop"/></svg><span>for key in self.secret_keys</span><span class="n">3 lines</span></div>
+            <div class="blk"><svg class="ico"><use href="#i-try"/></svg><span>try</span><span class="n">5 lines</span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <p class="small">Block types are told apart by their <b>icon</b>, never by colour. Steps, decision, loop and error handling are shown here. All blocks wear Steel; Lavender marks only what you are looking at: the selected box (outline) and the current step (fill).</p>
+          <div class="links">
+            <div><svg class="ln" height="6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--steel)" stroke-width="4"/></svg>Imports a file (thick)</div>
+            <div><svg class="ln" height="6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--steel)" stroke-width="1.5"/></svg>Calls a function (thin)</div>
+            <div><svg class="ln" height="6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--lav)" stroke-width="2" stroke-dasharray="6 4"/></svg>AI-guessed feature (dashed)</div>
+            <div><svg class="ln" height="6"><line x1="0" y1="3" x2="30" y2="3" stroke="var(--lav)" stroke-width="2.5"/></svg>Links of the selected box</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="mockup">
+  <div class="sec-head"><span class="sec-num">06</span><h2>App mockup</h2><span class="muted small">The main map screen, dark theme. Same layout as today.</span></div>
+  <div class="scroll-x">
+    <div class="mock" role="img" aria-label="Foothold main screen: side panel on the left, the map of files and functions on the right">
+      <div class="m-panel">
+        <div class="m-top"><span class="wm">f<i class="o"></i><i class="o on"></i>thold</span><span class="m-tools mono">☼ ⚙</span></div>
+        <div class="m-sec"><span class="label">Open code</span><div class="row" style="flex-wrap:nowrap"><div class="input" style="padding:6px 8px">github.com/pallets/itsdangerous</div><span class="btn btn-primary" style="padding:6px 10px">→</span></div></div>
+        <div class="m-sec"><span style="font:600 13px var(--head)">pallets/itsdangerous</span><span class="muted" style="font-size:11.5px">15 files · 114 functions</span></div>
+        <div class="m-sec"><span class="label">Search</span><div class="input" style="padding:6px 8px;color:var(--muted)">File, function or step…</div></div>
+        <div class="m-sec"><span class="label">Zoom level</span><div class="seg"><span>Files</span><span class="on">Functions</span><span>Blocks</span></div>
+          <span class="label" style="margin-top:4px">Links</span>
+          <div class="tg"><span class="box on"></span><svg class="ln" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--steel)" stroke-width="4"/></svg>Imports</div>
+          <div class="tg"><span class="box on"></span><svg class="ln" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--steel)" stroke-width="1.5"/></svg>Function calls</div>
+        </div>
+        <div class="m-sec"><span class="label">Claude notes</span><span class="btn" style="justify-content:center;border-color:var(--lav)">Explain with Claude</span></div>
+        <div class="m-sec"><span class="label">Step through</span><span class="btn" style="justify-content:center">Start from main</span></div>
+      </div>
+      <div class="m-map">
+        <svg style="left:0;top:0" width="710" height="600" aria-hidden="true">
+          <g fill="none" stroke-linecap="round">
+            <path d="M222 190 C 310 190, 320 222, 400 222" stroke="var(--steel)" stroke-width="3.5"/>
+            <path d="M342 478 C 372 478, 350 176, 400 176" stroke="var(--steel)" stroke-width="1.5"/>
+            <path d="M222 128 C 310 128, 320 140, 400 140" stroke="var(--lav)" stroke-width="2.5"/>
+            <path d="M342 456 C 390 430, 440 330, 440 242" stroke="var(--lav)" stroke-width="2" stroke-dasharray="6 4"/>
+          </g>
+        </svg>
+        <div class="fbox" style="left:30px;top:70px;width:190px">
+          <div class="fbox-head"><svg class="ico"><use href="#i-file"/></svg>signer.py</div>
+          <div class="fn sel"><div class="fn-head"><span class="fn-name">Signer.sign</span></div><span class="fn-sub">adds a signature</span></div>
+          <div class="fn"><div class="fn-head"><span class="fn-name">Signer.unsign</span></div><span class="fn-sub">checks and removes it</span></div>
+        </div>
+        <div class="fbox" style="left:400px;top:80px;width:190px">
+          <div class="fbox-head"><svg class="ico"><use href="#i-file"/></svg>encoding.py</div>
+          <div class="fn"><div class="fn-head"><span class="fn-name">base64_encode</span></div></div>
+          <div class="fn"><div class="fn-head"><span class="fn-name">want_bytes</span></div></div>
+          <div class="fn"><div class="fn-head"><span class="fn-name">int_to_bytes</span></div></div>
+        </div>
+        <div class="fbox" style="left:110px;top:420px;width:230px">
+          <div class="fbox-head"><svg class="ico"><use href="#i-file"/></svg>timed.py</div>
+          <div class="fn"><div class="fn-head"><span class="fn-name">TimestampSigner.sign</span></div></div>
+        </div>
+        <div class="hover-card" style="left:440px;top:340px;width:250px">
+          <div class="hc-top"><span class="hc-kind">Function</span><span>lines 72–110</span></div>
+          <div class="hc-title">Signer.sign</div>
+          <p class="small"><span class="ai-tag">AI</span>Adds a signature so you can tell later if anyone changed the value.</p>
+        </div>
+        <div class="m-legend" style="left:auto;right:14px">
+          <span class="label">Legend</span>
+          <div><svg class="ico"><use href="#i-steps"/></svg>Steps</div>
+          <div><svg class="ico"><use href="#i-if"/></svg>Decision</div>
+          <div><svg class="ico"><use href="#i-loop"/></svg>Loop</div>
+          <div><svg class="ico"><use href="#i-try"/></svg>Error handling</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="social">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Social post</h2><span class="muted small">Square, 1080 × 1080.</span></div>
+  <div class="post-wrap">
+    <div class="post" role="img" aria-label="Social post: See the map before you read the code">
+      <span class="wm">f<i class="o"></i><i class="o on"></i>thold</span>
+      <h4>See the map before you read the code.</h4>
+      <div class="post-img">
+        <svg viewBox="0 0 300 120" aria-hidden="true">
+          <g fill="none" stroke-linecap="round">
+            <path d="M88 30 C 130 30, 130 70, 170 70" stroke="#7A8297" stroke-width="3"/>
+            <path d="M88 44 C 120 44, 140 104, 200 100" stroke="#A396E6" stroke-width="2" stroke-dasharray="5 4"/>
+          </g>
+          <rect x="8" y="12" width="80" height="54" rx="6" fill="none" stroke="#7A8297" stroke-opacity="0.6" stroke-width="1.5"/>
+          <rect x="16" y="22" width="64" height="16" rx="3" fill="#3A3F4E"/>
+          <rect x="16" y="42" width="64" height="16" rx="3" fill="#3A3F4E" stroke="#A396E6" stroke-width="1.5"/>
+          <rect x="170" y="50" width="92" height="38" rx="6" fill="none" stroke="#7A8297" stroke-opacity="0.6" stroke-width="1.5"/>
+          <rect x="178" y="60" width="76" height="18" rx="3" fill="#3A3F4E"/>
+          <rect x="200" y="94" width="60" height="18" rx="3" fill="#3A3F4E"/>
+          <text x="22" y="33" fill="#E9EBF2" font-family="IBM Plex Mono, monospace" font-size="7">load_config</text>
+          <text x="22" y="53" fill="#E9EBF2" font-family="IBM Plex Mono, monospace" font-size="7">sign</text>
+          <text x="184" y="72" fill="#E9EBF2" font-family="IBM Plex Mono, monospace" font-size="7">want_bytes</text>
+        </svg>
+      </div>
+      <div class="post-cta"><span>A free desktop app for Python beginners.<br><span style="opacity:.7">It never runs your code.</span></span><b>Map your first project →</b></div>
+    </div>
+    <div class="caption">
+      <span class="label">Caption</span>
+      <p>Opening a real codebase for the first time is scary. Foothold turns a Python project into boxes you can open and follow: files, functions, and the steps inside them. Rest your mouse on a box for a plain-English note. Click it to see the code.</p>
+      <p>Built in 6 days at the Nmkkn AI Hackathon. Try it on your own project: <a href="https://github.com/Mixtirs/code-map">github.com/Mixtirs/code-map</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rules">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Rules of thumb</h2></div>
+  <ul class="rules">
+    <li class="yes">Lavender means "look here" or "do this next". One per view if you can.</li>
+    <li>No gradients, glows or glass. Shadows stay soft and short.</li>
+    <li class="yes">Tell things apart by shape, icon, thickness and dash before colour.</li>
+    <li>No icon on every heading. A word is enough.</li>
+    <li class="yes">Write like a patient friend: "Click a box to see its code."</li>
+    <li>No slogans like "Unlock your potential". Say what the button does.</li>
+  </ul>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var hex = b.getAttribute('data-hex');
+    var done = function () { b.textContent = 'Copied ' + hex; setTimeout(function () { b.textContent = 'Copy hex'; }, 1400); };
+    try { navigator.clipboard.writeText(hex).then(done, function () { b.textContent = hex; }); } catch (e) { b.textContent = hex; }
+  });
+});
+</script>

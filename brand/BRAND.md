@@ -30,3 +30,21 @@ in both themes, before any colour work. What failed and what changed:
 | Start screen | Three cards with icons repeated what the side panel already says. | A plain numbered list of three short steps. |
 
 Not changed: the layout, the screen order, and the features.
+
+## Brand guide
+
+The full guide (moodboard, colours, fonts, logo, icon, UI elements, mockup, social post) is published as one page:
+https://claude.ai/artifact/Uw2KGNSf6JZ8rPmdRhCnVS . Its source is [brand-guide.src.html](brand-guide.src.html)
+(the moodboard image is left out of the source file).
+
+Short version:
+
+| Colour | Hex | Dark theme | Light theme |
+| --- | --- | --- | --- |
+| Slate | `#2B3040` | background | text |
+| Mist | `#E9EBF2` | text | background |
+| Steel | `#7A8297` | secondary: lines, icons, labels | same |
+| Lavender | `#A396E6` | the one accent | same |
+
+Every other shade is a mix of two of these four. Fonts: **IBM Plex Mono** (headings, code, logo) and
+**IBM Plex Sans** (body). Icon: [icon.svg](icon.svg), [icon.png](icon.png) (1024 px).
