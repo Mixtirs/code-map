@@ -1,7 +1,7 @@
 import type { AiNotes } from '../../../shared/types'
 import { linesOf, titleOf, type GraphIndex } from '../lib/graph'
 import { KIND_META } from './kinds'
-import { Sparkles } from 'lucide-react'
+import { AiTag } from './Brand'
 
 interface Props {
   id: string
@@ -53,7 +53,7 @@ export function HoverCard({ id, x, y, index, ai, hasKey, bounds }: Props) {
       {code && code !== title && <code className="hc-code">{code}</code>}
       {note ? (
         <p className="hc-note">
-          <Sparkles size={12} /> {note}
+          <AiTag /> {note}
         </p>
       ) : (
         item.kind !== 'file' && (

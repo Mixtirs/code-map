@@ -1,6 +1,7 @@
 import { memo, useContext, createContext } from 'react'
 import { Handle, Position, type NodeProps, type Node } from '@xyflow/react'
-import { ChevronDown, ChevronRight, FileCode2, Sparkles } from 'lucide-react'
+import { ChevronDown, ChevronRight, FileCode2 } from 'lucide-react'
+import { AiTag } from './Brand'
 import type { MapNodeData } from '../layout/flow'
 import { KIND_META } from './kinds'
 
@@ -80,7 +81,7 @@ export const FunctionNodeView = memo(({ id, data }: NodeProps<MapNode>) => (
       <div className="node-text">
         <div className="node-title lod-title" title={data.title}>
           {data.title}
-          {data.hasNote && <Sparkles className="ai-dot" size={11} />}
+          {data.hasNote && <AiTag />}
         </div>
         <div className="node-sub lod-detail" title={data.subtitle}>
           {data.subtitle ? `${data.subtitle} · ` : ''}L{data.lines[0]}–{data.lines[1]}

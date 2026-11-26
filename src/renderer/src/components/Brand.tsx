@@ -22,3 +22,12 @@ export function AppIcon({ className }: { className?: string }) {
     </svg>
   )
 }
+
+/** Marks text written by Claude. Dashed, like the AI-guessed links on the map. */
+export function AiTag() {
+  return (
+    <span className="ai-tag" title="Written by Claude, may be wrong">
+      AI
+    </span>
+  )
+}

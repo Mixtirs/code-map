@@ -9,7 +9,6 @@ import {
   PanelLeftOpen,
   Play,
   Settings as SettingsIcon,
-  Sparkles,
   Square,
   Sun,
   TriangleAlert
@@ -271,7 +270,7 @@ export function SidePanel(p: Props) {
               ) : (
                 <>
                   <button id="explain" className="btn btn-accent" onClick={p.onRunAi}>
-                    <Sparkles size={15} /> {hasAi ? 'Explain again' : 'Explain with Claude'}
+                    {hasAi ? 'Explain again' : 'Explain with Claude'}
                   </button>
                   {p.aiStatus && p.aiStatus.state !== 'idle' && (
                     <div className={p.aiStatus.state === 'error' ? 'error' : 'muted small'}>

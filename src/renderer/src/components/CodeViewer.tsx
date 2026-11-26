@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import hljs from 'highlight.js/lib/core'
 import python from 'highlight.js/lib/languages/python'
-import { Sparkles, X } from 'lucide-react'
+import { X } from 'lucide-react'
+import { AiTag } from './Brand'
 import type { AiNotes } from '../../../shared/types'
 import { linesOf, titleOf, type GraphIndex } from '../lib/graph'
 
@@ -71,7 +72,7 @@ export function CodeViewer({ id, index, ai, onClose }: Props) {
       </div>
       {note && (
         <div className="cv-note">
-          <Sparkles size={12} /> {note}
+          <AiTag /> {note}
         </div>
       )}
       <div className="cv-code" ref={scroller}>

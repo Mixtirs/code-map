@@ -48,3 +48,14 @@ Short version:
 
 Every other shade is a mix of two of these four. Fonts: **IBM Plex Mono** (headings, code, logo) and
 **IBM Plex Sans** (body). Icon: [icon.svg](icon.svg), [icon.png](icon.png) (1024 px).
+
+## Anti-slop check (26 Nov 2026)
+
+| Check | Result before | Fix |
+| --- | --- | --- |
+| No emoji or icon on every heading | Failed: every side-panel heading had an icon. | Fixed in step 2: words only. |
+| No purple/blue gradients everywhere | Passed: no gradients. The only two `repeating-linear-gradient`s draw the dashed line samples in the legend. | None needed. |
+| No generic copy | Passed: every line says what to do ("Paste a public GitHub link…", "Click a box to see its code"). | None needed. |
+| No "3 cards with icons" layout | Failed: the start screen had exactly that. | Fixed in step 2: a plain numbered list. |
+| No glass or glow without a reason | Failed: inputs had a glow ring on focus, selected boxes had a glow ring, and the current step pulsed with a glow. | Focus is now a Lavender border. Selection is a solid outline, search hits a dashed outline, the current step a Lavender fill. No glow, no pulse. |
+| Looks like ours, not every AI app | Failed: Claude's notes were marked with the ✨ sparkles icon that every AI app uses, and the old orange-on-charcoal theme looked like a chat app. | AI text now wears a small dashed **AI** tag, the same dash as AI-guessed links on the map, so "dashed = guessed by AI" is one rule across the app. Own wordmark, own icon, Slate + Lavender. |
